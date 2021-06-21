@@ -1,9 +1,6 @@
 package ru.job4j.collection.map;
 
-import java.util.Arrays;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 /**
  * Класс реализует упрощенную структуру данных HashMap
@@ -65,7 +62,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
      * @return возвращает позицию в массиве
      */
     private int indexFor(int hash) {
-        return hash & table.length - 1;
+        return hash & (table.length - 1);
     }
 
     /**
@@ -93,7 +90,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public V get(K key) {
         int h = hash(key.hashCode());
         int index = indexFor(h);
-        if (table[index] != null) {
+        if (!Objects.equals(table[index], null)) {
             return table[index].value;
         }
         return null;
@@ -107,12 +104,12 @@ public class SimpleMap<K, V> implements Map<K, V> {
      */
     @Override
     public boolean remove(K key) {
-        modCount++;
-        count--;
         int h = hash(key.hashCode());
         int index = indexFor(h);
-        if (table[index] != null) {
+        if (!Objects.equals(table[index], null)) {
             table[index] = null;
+            modCount++;
+            count--;
             return true;
         }
         return false;
