@@ -1,6 +1,9 @@
 package ru.job4j.collection.map;
 
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Calendar;
+import java.util.Objects;
 
 /**
  * Класс описывает модель данных пользователя.
