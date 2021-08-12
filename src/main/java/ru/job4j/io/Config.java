@@ -50,7 +50,7 @@ public class Config {
         if (values.containsKey(key)) {
             return values.get(key);
         }
-        throw new UnsupportedOperationException("Don't impl this method yet!");
+        return null;
     }
 
     @Override
