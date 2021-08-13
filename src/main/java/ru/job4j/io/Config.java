@@ -47,10 +47,7 @@ public class Config {
      * @return возвращает значение
      */
     public String value(String key) {
-        if (values.containsKey(key)) {
             return values.get(key);
-        }
-        return null;
     }
 
     @Override
