@@ -17,9 +17,14 @@ import java.util.function.Predicate;
  */
 public class Search {
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get(".");
-        search(start, p -> p.toFile().getName().endsWith("js")).forEach(System.out::println);
-        search(start, p -> p.toFile().length() == 0).forEach(System.out::println);
+        if (args.length != 2) {
+            throw new IllegalArgumentException("The program must be run with parameters.\n"
+                    + " The first parameter is the starting folder."
+                    + " The second parameter is the file extension.\n Usage java -jar search.jar ROOT_FOLDER EXTENSION");
+        }
+        Path start = Paths.get(args[0]);
+        search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
+        // search(start, p -> p.toFile().length() == 0).forEach(System.out::println);
     }
 
     /**
