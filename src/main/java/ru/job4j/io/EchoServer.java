@@ -32,12 +32,14 @@ public class EchoServer {
                     out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                     StringBuilder sb = new StringBuilder();
 
-                    for (String str = in.readLine(); str != null && !str.isEmpty(); str = in.readLine()) {
-                        sb.append(str);
+                    String str;
+                    while ((str = in.readLine()) != null && !str.isEmpty()) {
+                        sb.append(str).append("\r\n");
                     }
-                    if (sb.toString().contains("GET /?msg=Hello HTTP/1.1")) {
+
+                    if (sb.toString().contains("msg=Hello")) {
                         out.write("Hello\r\n\r\n".getBytes());
-                    } else if (sb.toString().contains("GET /?msg=Exit HTTP/1.1")) {
+                    } else if (sb.toString().contains("msg=Exit")) {
                         server.close();
                         break;
                     } else {
