@@ -1,0 +1,38 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<!--Модели данных, на основе которых будет создан объект и описан с использованием xml -->
+<!-- public class Book {
+
+    private String title;
+    private boolean discount;
+    private int price;
+    private Author author;
+    private String[] chapters;
+
+    public Book(String title, boolean discount, int price, Author author, String... chapters) {
+        this.title = title;
+        this.discount = discount;
+        this.price = price;
+        this.author = author;
+        this.chapters = chapters;
+    }
+
+    public class Author {
+
+        private String name;
+
+        public Author(String name) {
+            this.name = name;
+        }
+    } -->
+<!-- Объект для преобразования в xml-->
+<!-- final Book javaBook = new Book("Java. Библиотека профессионала",
+                false, 1500, new Author("Кей Хорстманн"),
+                "2. Ввод и вывод", "3. XML"); -->
+
+<book title="Java. Библиотека профессионала" discount="false" price="1500">
+    <author name="Кей Хорстманн"/>
+    <chapters>
+        <chapter>2. Ввод и вывод</chapter>
+        <chapter>3. XML</chapter>
+    </chapters>
+</book>
