@@ -57,20 +57,27 @@ public class Book {
                 + '}';
     }
 
+    /**
+     * В методе получаем контекст для доступа к API (создаем объект context),
+     * создаем сериализатор (в коде это объект marshaller),
+     * далее указываем что нам нужно форматирование,
+     * затем сериализуем вызывая метод marshal.
+     * Для десериализации нам нужно создать десериализатор (создаем объект unmarshaller)
+     *
+     * @param args массив строк
+     * @throws JAXBException Это корневой класс исключений для всех исключений JAXB.
+     */
     public static void main(String[] args) throws JAXBException {
         final ru.job4j.serialization.xml.Book javaBook = new ru.job4j.serialization.xml.Book("Java. Библиотека профессионала",
                 false, 1500, new ru.job4j.serialization.xml.Author("Кей Хорстманн"),
                 "2. Ввод и вывод", "3. XML");
 
-        // Получаем контекст для доступа к АПИ
         JAXBContext context = JAXBContext.newInstance(ru.job4j.serialization.xml.Book.class);
-        // Создаем сериализатор
         Marshaller marshaller = context.createMarshaller();
-        // Указываем, что нам нужно форматирование
+
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         String xml = "";
         try (StringWriter writer = new StringWriter()) {
-            // Сериализуем
             marshaller.marshal(javaBook, writer);
             xml = writer.getBuffer().toString();
             System.out.println(xml);
@@ -78,10 +85,8 @@ public class Book {
             e.printStackTrace();
         }
 
-        // Для десериализации нам нужно создать десериализатор
         Unmarshaller unmarshaller = context.createUnmarshaller();
         try (StringReader reader = new StringReader(xml)) {
-            // Десериализуем
             Book result = (Book) unmarshaller.unmarshal(reader);
             System.out.println(result);
         }
