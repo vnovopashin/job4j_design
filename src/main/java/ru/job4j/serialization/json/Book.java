@@ -32,6 +32,26 @@ public class Book {
         this.chapters = chapters;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public boolean isDiscount() {
+        return discount;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public String[] getChapters() {
+        return chapters;
+    }
+
     @Override
     public String toString() {
         return "Book{"
@@ -47,11 +67,10 @@ public class Book {
         final Book javaBook = new Book("Java. Библиотека профессионала",
                 false, 1500, new Author("Кей Хорстманн"),
                 "2. Ввод и вывод", "3. XML");
-        /*Преобразуем объект javaBook в json-строку*/
+
         final Gson gson = new GsonBuilder().create();
         System.out.println(gson.toJson(javaBook));
 
-        /*Модифицируем json-строку*/
         final String javaBookJson = "{\"title\":\"Java. Библиотека профессионала\","
                 + "\"discount\":false,"
                 + "\"price\":1500,"
