@@ -7,6 +7,7 @@ package ru.job4j.serialization.json;
  * Чтобы избежать исключения, необходимо разорвать цепочку, как правило,
  * это делается в момент перехода по ссылке на объект,
  * который уже сериализован. В библиотеке JSON-Java (org.json) для этого существует аннотация @JSONPropertyIgnore
+ * Если установить аннотацию @JSONPropertyIgnore над методом getB(), то исключение StackOverflowError не возникнет.
  *
  * @author Vasiliy Novopashin
  * @version 1.0
@@ -14,7 +15,6 @@ package ru.job4j.serialization.json;
 public class A {
     private B b;
 
-    // @JSONPropertyIgnore
     public B getB() {
         return b;
     }
