@@ -9,8 +9,7 @@ import java.util.function.Predicate;
 
 /**
  * Класс осуществляет поиск по определенному предикату,
- * в качестве примера осуществляется поиск файлов имеющих окончание js,
- * а также файлов имеющих нулевой размер.
+ * в качестве примера осуществляется поиск файлов имеющих окончание js
  *
  * @author Vasiliy Novopashin
  * @version 1.0
@@ -24,7 +23,6 @@ public class Search {
         }
         Path start = Paths.get(args[0]);
         search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
-        // search(start, p -> p.toFile().length() == 0).forEach(System.out::println);
     }
 
     /**
