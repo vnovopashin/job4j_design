@@ -37,9 +37,9 @@ select e.id as empl_id, e.name as empl_name, d.id as dep_id, d.name as dep_name 
 cross join departments d;
 
 /*left join find departments without employees*/
-select d.name from employees e
-left join departments d on e.departments_id = d.id
-where e.name is null;
+select d.name from departments d
+left join employees e on e.departments_id = d.id
+where e.id is null;
 
 /*using left join and right join for equals result*/
 select e.id as empl_id, e.name as empl_name, d.id as dep_id, d.name as dep_name
