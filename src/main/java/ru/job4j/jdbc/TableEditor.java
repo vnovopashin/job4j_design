@@ -1,7 +1,5 @@
 package ru.job4j.jdbc;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -31,13 +29,6 @@ public class TableEditor implements AutoCloseable {
      * необходимые настройки для подключения метод читает из файла app.properties
      */
     private void initConnection() {
-        ClassLoader loader = TableEditor.class.getClassLoader();
-        try (InputStream is = loader.getResourceAsStream("app.properties")) {
-            properties.load(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        properties.getProperty("reg");
         String url = properties.getProperty("url");
         String login = properties.getProperty("login");
         String password = properties.getProperty("password");
@@ -49,22 +40,31 @@ public class TableEditor implements AutoCloseable {
     }
 
     /**
+     * Метод выполняет запросы к базе данных
+     *
+     * @param query принимает запрос, который необходимо выполнить
+     */
+    private void executeStatement(String query) {
+        try (Statement statement = connection.createStatement()) {
+            statement.execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Метод создает пустую таблицу в базе данных
      *
      * @param tableName имя создаваемой таблицы
      */
     public void createTable(String tableName) {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "create table if not exists %s (%s, %s);",
-                    tableName,
-                    "id serial primary key",
-                    "name text"
-            );
-            statement.execute(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String sql = String.format(
+                "create table if not exists %s (%s, %s);",
+                tableName,
+                "id serial primary key",
+                "name text"
+        );
+        executeStatement(sql);
     }
 
     /**
@@ -73,36 +73,28 @@ public class TableEditor implements AutoCloseable {
      * @param tableName имя удаляемой таблицы
      */
     public void dropTable(String tableName) {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "drop table %s;",
-                    tableName
-            );
-            statement.execute(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String sql = String.format(
+                "drop table %s;",
+                tableName
+        );
+        executeStatement(sql);
     }
 
     /**
-     * Метод добавляет столбец из таблицы
+     * Метод добавляет столбец в таблицу
      *
      * @param tableName  имя таблицы
      * @param columnName имя добавляемого столбца
      * @param type       тип добавляемого столбца
      */
     public void addColumn(String tableName, String columnName, String type) {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "alter table %s add %s %s;",
-                    tableName,
-                    columnName,
-                    type
-            );
-            statement.execute(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String sql = String.format(
+                "alter table %s add %s %s;",
+                tableName,
+                columnName,
+                type
+        );
+        executeStatement(sql);
     }
 
     /**
@@ -112,16 +104,12 @@ public class TableEditor implements AutoCloseable {
      * @param columnName имя удаляемого столбца
      */
     public void dropColumn(String tableName, String columnName) {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "alter table %s drop column %s;",
-                    tableName,
-                    columnName
-            );
-            statement.execute(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String sql = String.format(
+                "alter table %s drop column %s;",
+                tableName,
+                columnName
+        );
+        executeStatement(sql);
     }
 
     /**
@@ -132,17 +120,13 @@ public class TableEditor implements AutoCloseable {
      * @param newColumnName новое имя столбца
      */
     public void renameColumn(String tableName, String columnName, String newColumnName) {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "alter table %s rename column %s to %s;",
-                    tableName,
-                    columnName,
-                    newColumnName
-            );
-            statement.execute(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String sql = String.format(
+                "alter table %s rename column %s to %s;",
+                tableName,
+                columnName,
+                newColumnName
+        );
+        executeStatement(sql);
     }
 
     /**
