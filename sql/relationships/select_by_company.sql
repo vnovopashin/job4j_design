@@ -17,11 +17,7 @@ from company
 join person on person.company_id = company.id
 group by company.name
 having count(person.name) =
-(/*Вычисляем максимальное количество*/
-	select max(Количество) as Максимальное_Количество
-from
-(/*Считаем количество человек в каждой компании*/
-	select company.name, count(person.name) as Количество from company
-join person on person.company_id = company.id
-group by company.name) as query_in
-);
+(select count(name) from person
+group by company_id
+order by company_id desc
+limit 1);
