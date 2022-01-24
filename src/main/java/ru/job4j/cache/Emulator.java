@@ -55,7 +55,8 @@ public class Emulator {
                 case 3:
                     getFromCache();
                     break;
-                default: run = false;
+                default:
+                    run = false;
             }
         }
     }
@@ -83,7 +84,7 @@ public class Emulator {
     private void addToCache() {
         System.out.println("Введите название файла: ");
         file = scanner.next();
-        cache.put(file, cache.get(String.format("%s%s", dir, file)));
+        cache.get(file);
     }
 
     /**
