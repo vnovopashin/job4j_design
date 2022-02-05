@@ -90,7 +90,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public V get(K key) {
         int h = hash(key.hashCode());
         int index = indexFor(h);
-        if (!Objects.equals(table[index], null)) {
+        if (!Objects.equals(table[index], null) && Objects.equals(table[index].key, key)) {
             return table[index].value;
         }
         return null;
@@ -106,7 +106,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public boolean remove(K key) {
         int h = hash(key.hashCode());
         int index = indexFor(h);
-        if (!Objects.equals(table[index], null)) {
+        if (!Objects.equals(table[index], null) && Objects.equals(table[index].key, key)) {
             table[index] = null;
             modCount++;
             count--;
