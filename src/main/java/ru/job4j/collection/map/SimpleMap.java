@@ -33,7 +33,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
         MapEntry<K, V> entry = new MapEntry<>(key, value);
         int h = hash(key.hashCode());
         int index = indexFor(h);
-        if (count + 1 == capacity * LOAD_FACTOR) {
+        if (count + 1 >= capacity * LOAD_FACTOR) {
             expand();
         }
         if (table[index] == null) {
