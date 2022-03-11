@@ -1,0 +1,15 @@
+Hello
+nice to meet you.
+ok
+where are you from?
+Tomsk
+how are you?
+great
+bye!
+стоп
+тест
+продолжить
+nice to meet you.
+мне тоже
+I am bot, my name is r2d2.
+закончить
