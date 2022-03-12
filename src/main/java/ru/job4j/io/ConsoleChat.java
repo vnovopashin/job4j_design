@@ -37,9 +37,9 @@ public class ConsoleChat {
         List<String> phrases = readPhrases();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             String str = br.readLine();
-            while (!str.equals(OUT)) {
-                if (str.equals(STOP)) {
-                    while (!str.equals(CONTINUE)) {
+            while (!OUT.equals(str)) {
+                if (STOP.equals(str)) {
+                    while (!CONTINUE.equals(str)) {
                         log.add(str);
                         str = br.readLine();
                     }
