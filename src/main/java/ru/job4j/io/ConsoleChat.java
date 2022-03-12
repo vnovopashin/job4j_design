@@ -50,7 +50,7 @@ public class ConsoleChat {
                 System.out.println(answer);
                 log.add(answer);
                 str = br.readLine();
-                if (str.equals(OUT)) {
+                if (OUT.equals(str)) {
                     log.add(str);
                 }
             }
