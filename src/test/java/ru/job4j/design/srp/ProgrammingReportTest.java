@@ -21,7 +21,7 @@ public class ProgrammingReportTest {
         store.add(worker);
         Report engine = new ProgrammingReport(store);
         StringBuilder expect = new StringBuilder()
-                .append("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">")
+                .append("<!DOCTYPE HTML>")
                 .append(System.lineSeparator())
                 .append("<html>").append(System.lineSeparator())
                 .append("<head>").append(System.lineSeparator())
