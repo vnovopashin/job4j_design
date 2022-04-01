@@ -10,6 +10,7 @@ import java.util.function.Predicate;
  */
 public class AccountingReport implements Report {
     private Store store;
+    public static final double RATIO = 1.1;
 
     public AccountingReport(Store store) {
         this.store = store;
@@ -24,7 +25,7 @@ public class AccountingReport implements Report {
             text.append(employee.getName()).append(";")
                     .append(employee.getHired()).append(";")
                     .append(employee.getFired()).append(";")
-                    .append(employee.getSalary()).append("₽").append(";")
+                    .append(employee.getSalary() * RATIO).append("₽").append(";")
                     .append(System.lineSeparator());
         }
         return text.toString();
